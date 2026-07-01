@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Smart CBC Analysis</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/auth.css">
+</head>
+<body>
+    <div class="auth-wrapper">
+        <!-- Left Visual Side -->
+        <div class="auth-visual-side">
+            <div class="auth-logo">
+                <span>🩸</span> SMART CBC
+            </div>
+            
+            <div class="auth-visual-content">
+                <h1 class="auth-visual-title">Advanced Blood Diagnostics SaaS.</h1>
+                <p class="auth-visual-text">Join Chetna, Vaishnavi, Roopa and thousands of others monitoring their clinical values over time.</p>
+            </div>
+            
+            <!-- Animated Background Cells -->
+            <div class="auth-decoration-cells">
+                <div class="floating-cell floating-cell-1"></div>
+                <div class="floating-cell floating-cell-2"></div>
+                <div class="floating-cell floating-cell-3"></div>
+            </div>
+            
+            <!-- Particle Container -->
+            <div class="particle-container">
+                <div class="particle" style="left: 10%; width: 6px; height: 6px; animation-delay: 0s; animation-duration: 12s;"></div>
+                <div class="particle" style="left: 30%; width: 8px; height: 8px; animation-delay: 2s; animation-duration: 16s;"></div>
+                <div class="particle" style="left: 55%; width: 5px; height: 5px; animation-delay: 4s; animation-duration: 10s;"></div>
+                <div class="particle" style="left: 75%; width: 10px; height: 10px; animation-delay: 1s; animation-duration: 18s;"></div>
+                <div class="particle" style="left: 90%; width: 7px; height: 7px; animation-delay: 6s; animation-duration: 14s;"></div>
+            </div>
+
+            <div class="auth-visual-footer">
+                &copy; 2026 Smart CBC Analysis System. Designed for clinical overview.
+            </div>
+        </div>
+
+        <!-- Right Form Side -->
+        <div class="auth-form-side">
+            <div class="auth-form-container glass-panel">
+                <div class="auth-header">
+                    <h2 class="auth-title">Create Account</h2>
+                    <p class="auth-subtitle">Already have an account? <a href="login.html">Sign in now</a></p>
+                </div>
+                
+                <form id="register-form">
+                    <!-- Progress Tracker -->
+                    <div class="steps-progress-container" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px; position: relative;">
+                        <div style="position: absolute; top: 12px; left: 0; width: 100%; height: 2px; background: rgba(255,255,255,0.08); z-index: 0;"></div>
+                        <div id="progress-bar-fill" style="position: absolute; top: 12px; left: 0; width: 0%; height: 2px; background: var(--primary); z-index: 1; transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1);"></div>
+                        
+                        <div class="step-indicator active" id="step-ind-1" style="width: 26px; height: 26px; border-radius: 50%; background: var(--primary); border: 2px solid var(--primary); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 700; z-index: 2; position: relative; transition: all 0.35s ease;">1</div>
+                        <div class="step-indicator" id="step-ind-2" style="width: 26px; height: 26px; border-radius: 50%; background: var(--surface); border: 2px solid var(--border-glass); color: var(--text-secondary); display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 700; z-index: 2; position: relative; transition: all 0.35s ease;">2</div>
+                        <div class="step-indicator" id="step-ind-3" style="width: 26px; height: 26px; border-radius: 50%; background: var(--surface); border: 2px solid var(--border-glass); color: var(--text-secondary); display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 700; z-index: 2; position: relative; transition: all 0.35s ease;">3</div>
+                    </div>
+
+                    <!-- Step 1: Basic Details -->
+                    <div class="register-step-section" id="step-section-1">
+                        <div class="form-group">
+                            <label for="name" class="form-label">Full Name</label>
+                            <input type="text" id="name" class="form-input" placeholder="John Doe" required autocomplete="name">
+                            <span id="name-error" class="error-msg"></span>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email" class="form-label">Email Address</label>
+                            <input type="email" id="email" class="form-input" placeholder="name@example.com" required autocomplete="email">
+                            <span id="email-error" class="error-msg"></span>
+                        </div>
+                        
+                        <button type="button" class="btn btn-primary next-step-btn" data-next="2" style="width: 100%; margin-top: 8px;">Continue</button>
+                    </div>
+
+                    <!-- Step 2: Security Setup -->
+                    <div class="register-step-section" id="step-section-2" style="display: none;">
+                        <div class="form-group">
+                            <label for="password" class="form-label">Password</label>
+                            <div class="password-input-wrapper">
+                                <input type="password" id="password" class="form-input" placeholder="Min. 6 characters" required autocomplete="new-password">
+                                <button type="button" class="password-toggle-btn" id="password-toggle-btn">👁️</button>
+                            </div>
+                            <span id="password-error" class="error-msg"></span>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="confirm-password" class="form-label">Confirm Password</label>
+                            <div class="password-input-wrapper">
+                                <input type="password" id="confirm-password" class="form-input" placeholder="Repeat your password" required autocomplete="new-password">
+                            </div>
+                            <span id="confirm-password-error" class="error-msg"></span>
+                        </div>
+                        
+                        <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 12px; margin-top: 8px;">
+                            <button type="button" class="btn btn-secondary prev-step-btn" data-prev="1" style="width: 100%;">Back</button>
+                            <button type="button" class="btn btn-primary next-step-btn" data-next="3" style="width: 100%;">Continue</button>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Confirmation -->
+                    <div class="register-step-section" id="step-section-3" style="display: none;">
+                        <h4 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 16px; color: var(--primary);">Confirm Registration</h4>
+                        <div style="background: rgba(255,255,255,0.015); border: 1px solid var(--border-glass); padding: 18px; border-radius: var(--radius-sm); margin-bottom: 24px;">
+                            <div style="margin-bottom: 12px; font-size: 0.95rem;">
+                                <span style="color: var(--text-secondary); font-weight: 500;">Name:</span>
+                                <strong id="confirm-name-display" style="display: block; margin-top: 4px; color: var(--text-primary);">John Doe</strong>
+                            </div>
+                            <div style="font-size: 0.95rem;">
+                                <span style="color: var(--text-secondary); font-weight: 500;">Email:</span>
+                                <strong id="confirm-email-display" style="display: block; margin-top: 4px; color: var(--text-primary);">name@example.com</strong>
+                            </div>
+                        </div>
+                        
+                        <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 12px;">
+                            <button type="button" class="btn btn-secondary prev-step-btn" data-prev="2" style="width: 100%;">Back</button>
+                            <button type="submit" class="btn btn-primary auth-btn" style="width: 100%;">Register</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script loading -->
+    <script src="js/api.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/auth.js"></script>
+    <script>
+        // Password visibility toggle
+        const pwInput = document.getElementById('password');
+        const pwToggle = document.getElementById('password-toggle');
+        if (pwInput && pwToggle) {
+            pwToggle.addEventListener('click', () => {
+                const isPw = pwInput.type === 'password';
+                pwInput.type = isPw ? 'text' : 'password';
+                pwToggle.textContent = isPw ? '🙈' : '👁️';
+            });
+        }
+    </script>
+</body>
+</html>

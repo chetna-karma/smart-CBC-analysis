@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analysis History - Smart CBC Analysis</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/history.css">
+    <!-- HTML2PDF CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body class="dashboard-layout">
+    <div class="main-wrapper">
+        <div class="glow-spot glow-spot-1"></div>
+        <div class="glow-spot glow-spot-2"></div>
+
+        <!-- Navigation Bar -->
+        <nav class="navbar no-print" id="navbar">
+            <div class="container nav-container">
+                <a href="index.html" class="navbar-brand">
+                    <span>🩸</span> SMART CBC
+                </a>
+                <ul class="nav-links" id="nav-links">
+                    <!-- Loaded dynamically in main.js -->
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Main History Area -->
+        <main class="container" id="history-main-content" style="flex:1; padding-top:40px; margin-bottom:40px;">
+            <header style="margin-bottom: 32px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+                <div>
+                    <h1 style="font-size: 2.2rem; font-weight: 800; letter-spacing:-0.025em;">Analysis History</h1>
+                    <p style="color: var(--text-secondary);">Browse, filter, and review all your previously generated CBC report logs</p>
+                </div>
+                <div style="display:flex; gap:10px;">
+                    <button class="btn btn-secondary no-print" id="export-history-csv-btn">📥 Export CSV</button>
+                    <button class="btn btn-secondary no-print" id="export-history-pdf-btn">📥 Export PDF</button>
+                </div>
+            </header>
+
+            <!-- PDF Header for History Table -->
+            <div class="pdf-only-header" style="border-bottom: 2px solid var(--primary); padding-bottom: 20px; margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                <div>
+                    <div style="font-family: 'Outfit', sans-serif; font-size: 2rem; font-weight: 900; display: flex; align-items: center; gap: 8px;">
+                        <span style="color: var(--primary);">🩸</span> SMART CBC HISTORY REPORT
+                    </div>
+                    <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 4px;">Smart CBC Analysis & Health Suggestion System</div>
+                </div>
+                <div style="text-align: right; font-size: 0.9rem; line-height:1.5;">
+                    <div><strong>Patient:</strong> <span id="history-pdf-patient-name">-</span></div>
+                    <div><strong>Email:</strong> <span id="history-pdf-patient-email">-</span></div>
+                    <div><strong>Date Exported:</strong> <span id="history-pdf-export-date">-</span></div>
+                </div>
+            </div>
+
+            <!-- Search, filter and sorting headers -->
+            <div class="history-controls no-print">
+                <input type="text" id="search-input" class="form-input history-search-input" placeholder="Search analysis summary contents...">
+                
+                <div class="history-filters-group">
+                    <select id="risk-filter" class="history-filter-select">
+                        <option value="">All Reports</option>
+                        <option value="low">Low Risk</option>
+                        <option value="medium">Medium Risk</option>
+                        <option value="high">High Risk</option>
+                        <option value="favorites">Favorites Only</option>
+                    </select>
+
+                    <select id="sort-filter" class="history-filter-select">
+                        <option value="newest">Newest First</option>
+                        <option value="oldest">Oldest First</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Table content glass panel -->
+            <div class="glass-panel" style="padding:24px; margin-bottom:24px;">
+                <div class="table-responsive">
+                    <table class="custom-table">
+                        <thead>
+                            <tr>
+                                <th>Fav</th>
+                                <th>Date / Time</th>
+                                <th>Hemoglobin (g/dL)</th>
+                                <th>WBC (/µL)</th>
+                                <th>Platelets (/µL)</th>
+                                <th>RBC (M/µL)</th>
+                                <th>MCV (fL)</th>
+                                <th>Risk Score</th>
+                                <th class="no-print">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="history-table-body">
+                            <tr>
+                                <td colspan="9" style="text-align: center; color: var(--text-muted); padding: 32px 0;">
+                                    Loading history logs...
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Pagination Controls -->
+                <div class="pagination-container no-print">
+                    <span id="pagination-info" style="color: var(--text-secondary); font-size: 0.9rem;">Showing 0-0 of 0 entries</span>
+                    <div style="display: flex; gap: 8px;">
+                        <button id="prev-page-btn" class="btn btn-secondary pagination-btn">Previous</button>
+                        <button id="next-page-btn" class="btn btn-secondary pagination-btn">Next</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Modal Dialog details popup -->
+        <div class="modal-overlay" id="details-modal">
+            <div class="modal-content glass-panel" id="modal-report-content" style="max-width: 800px; padding: 32px;">
+                <div class="modal-header" style="display: flex; justify-content: space-between; align-items: center;">
+                    <h2 style="font-size:1.4rem; font-weight:800;">Blood Report Details</h2>
+                    <div style="display: flex; gap: 10px; align-items: center;">
+                        <button class="btn btn-secondary no-print" id="modal-download-pdf-btn" style="padding: 6px 12px; font-size: 0.85rem;">📥 Download PDF</button>
+                        <button class="modal-close-btn" id="modal-close-btn" style="padding: 0; line-height: 1;">&times;</button>
+                    </div>
+                </div>
+
+                <!-- PDF Header for History Details Modal -->
+                <div class="pdf-only-header" style="border-bottom: 2px solid var(--primary); padding-bottom: 20px; margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <div style="font-family: 'Outfit', sans-serif; font-size: 2rem; font-weight: 900; display: flex; align-items: center; gap: 8px;">
+                            <span style="color: var(--primary);">🩸</span> SMART CBC REPORT
+                        </div>
+                        <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 4px;">Smart CBC Analysis & Health Suggestion System</div>
+                    </div>
+                    <div style="text-align: right; font-size: 0.9rem; line-height:1.5;">
+                        <div><strong>Patient:</strong> <span id="modal-pdf-patient-name">-</span></div>
+                        <div><strong>Email:</strong> <span id="modal-pdf-patient-email">-</span></div>
+                        <div><strong>Date:</strong> <span id="modal-pdf-report-date">-</span></div>
+                    </div>
+                </div>
+                
+                <div class="modal-body-grid">
+                    <!-- Score, Health Summary column -->
+                    <div style="border-right: 1px solid var(--border-glass); padding-right:16px;">
+                        <h3 style="font-size:1.1rem; font-weight:800; margin-bottom:16px; text-align:center;">Report Health Score</h3>
+                        <div class="risk-gauge-container" style="padding: 0 0 16px 0; display: flex; justify-content: center;">
+                            <div class="risk-gauge-circle" id="modal-score-circle" style="width:120px; height:120px;">
+                                <div class="risk-gauge-inner" style="width:105px; height:105px;">
+                                    <span class="risk-gauge-value" id="modal-score-value" style="font-size:1.8rem;">0%</span>
+                                    <span class="risk-gauge-label" id="modal-score-label" style="font-size:0.65rem;">Normal</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="border-top:1px solid var(--border-glass); padding-top:16px; margin-top:16px;">
+                            <h4 style="font-size:0.95rem; font-weight:700; color:var(--text-secondary); margin-bottom:8px; text-transform:uppercase; letter-spacing:0.04em;">Summary</h4>
+                            <div id="modal-summary" style="font-size:0.88rem; color:var(--text-secondary); line-height:1.5;"></div>
+                        </div>
+
+                        <div style="border-top:1px solid var(--border-glass); padding-top:16px; margin-top:16px;">
+                            <h4 style="font-size:0.95rem; font-weight:700; color:var(--text-secondary); margin-bottom:8px; text-transform:uppercase; letter-spacing:0.04em;">Dietary & Health Advice</h4>
+                            <div id="modal-recommendations" style="font-size:0.88rem; color:var(--text-secondary); line-height:1.5;"></div>
+                        </div>
+                    </div>
+
+                    <!-- Breakdown Parameters detail list -->
+                    <div>
+                        <h4 style="font-size:0.95rem; font-weight:700; text-transform:uppercase; color:var(--text-secondary); margin-bottom:16px; letter-spacing:0.04em;">Parameter Measurements</h4>
+                        <div class="parameter-status-list" id="modal-parameters-breakdown" style="gap:12px;">
+                            <!-- Dynamically loaded in history.js -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Delete Confirmation Modal Dialog -->
+        <div class="modal-overlay" id="delete-confirm-modal">
+            <div class="modal-content glass-panel" style="max-width: 400px; padding: 24px; text-align: center;">
+                <h3 style="font-size: 1.4rem; font-weight:800; color: var(--color-high); margin-bottom: 12px;">Delete Blood Analysis?</h3>
+                <p style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 24px; line-height: 1.5;">
+                    Are you sure you want to permanently delete this report analysis? This action cannot be undone.
+                </p>
+                <div style="display: flex; gap: 12px; justify-content: center;">
+                    <button class="btn btn-secondary" id="delete-cancel-btn">Cancel</button>
+                    <button class="btn btn-danger" id="delete-confirm-btn">Delete</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer no-print">
+            <div class="container">
+                <p>&copy; 2026 Smart CBC Analysis System. For informational purposes only. Not a medical diagnostic substitute.</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Script loading -->
+    <script src="js/api.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/history.js"></script>
+</body>
+</html>

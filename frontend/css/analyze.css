@@ -1,0 +1,337 @@
+.input-hint {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    margin-top: 6px;
+    font-weight: 500;
+}
+.form-card-header {
+    border-bottom: 1px solid var(--border-glass);
+    padding-bottom: 20px;
+    margin-bottom: 28px;
+}
+
+/* Tab Steps Styling */
+.step-tabs-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px !important;
+    border-bottom: 1px solid var(--border-glass);
+    padding-bottom: 12px;
+}
+.step-tab {
+    flex: 1;
+    text-align: center;
+    padding: 16px !important;
+    font-weight: 600;
+    font-size: 1rem !important;
+    color: var(--text-secondary);
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: var(--transition);
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: -0.01em;
+}
+.step-tab:hover {
+    color: var(--text-primary);
+}
+.step-tab.active {
+    color: var(--primary) !important;
+    border-bottom-color: var(--primary) !important;
+    text-shadow: 0 0 10px rgba(255, 54, 94, 0.3);
+}
+.form-step-panel {
+    display: none;
+}
+.form-step-panel.active {
+    display: block;
+}
+
+/* Step navigation buttons */
+.step-nav-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 36px;
+    border-top: 1px solid var(--border-glass);
+    padding-top: 28px;
+}
+
+/* Analyzer Form Grid Layout overrides */
+.analyzer-card {
+    padding: 40px !important;
+    border-radius: 24px !important;
+    background: rgba(11, 18, 32, 0.65) !important;
+    box-shadow: var(--shadow-lg), 0 0 35px rgba(255, 54, 94, 0.04) !important;
+}
+
+/* Parameters breakdown visual rows */
+.parameter-status-row {
+    margin-bottom: 24px !important;
+    padding: 28px !important;
+    border-radius: 24px !important;
+    border: 1px solid var(--border-glass) !important;
+    background: rgba(17, 24, 39, 0.5) !important;
+    box-shadow: var(--shadow-sm) !important;
+    transition: var(--transition) !important;
+}
+.parameter-status-row:hover {
+    transform: translateY(-4px) !important;
+    border-color: rgba(255, 255, 255, 0.15) !important;
+    box-shadow: var(--shadow-md), 0 0 20px rgba(255, 54, 94, 0.03) !important;
+}
+
+.parameter-row-header .param-name {
+    font-family: 'Outfit', sans-serif !important;
+    font-weight: 800 !important;
+    font-size: 1.15rem !important;
+    letter-spacing: 0.05em !important;
+}
+
+/* Diagnostic visual progress bar */
+.param-bar-wrapper {
+    margin: 20px 0 24px 0 !important;
+    background: rgba(255, 255, 255, 0.02) !important;
+    border: 1px solid rgba(255, 255, 255, 0.06) !important;
+    border-radius: 14px !important;
+    padding: 16px !important;
+}
+.param-bar-track {
+    height: 10px !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+    border-radius: 6px !important;
+    position: relative;
+    margin-top: 12px !important;
+    overflow: visible !important;
+}
+.param-bar-indicator {
+    height: 100% !important;
+    border-radius: 6px !important;
+    transition: width 1s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+.param-bar-marker {
+    position: absolute !important;
+    height: 18px !important;
+    width: 3px !important;
+    background: #ffffff !important;
+    top: -4px !important;
+    border-radius: 2px !important;
+    box-shadow: 0 0 8px #ffffff;
+}
+.param-bar-range {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem !important;
+    color: var(--text-muted) !important;
+    margin-top: 10px !important;
+    font-weight: 500 !important;
+}
+
+/* Suggestions, dietary & lifestyle */
+#result-food-suggestions, #result-lifestyle-suggestions {
+    margin-top: 12px;
+}
+#result-food-suggestions ul, #result-lifestyle-suggestions ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+#result-food-suggestions ul li, #result-lifestyle-suggestions ul li {
+    padding: 14px 18px !important;
+    border-radius: 14px !important;
+    background: rgba(255, 255, 255, 0.015) !important;
+    border: 1px solid var(--border-glass) !important;
+    transition: var(--transition) !important;
+    font-size: 0.92rem !important;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+}
+#result-food-suggestions ul li:hover, #result-lifestyle-suggestions ul li:hover {
+    background: rgba(255, 255, 255, 0.03) !important;
+    border-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+/* Left Column: Keep Risk Level card, Overall Score and Summary visible */
+.col-4 > div:nth-child(2) {
+    /* display: none !important; */
+}
+
+/* Right Column: Keep Guidelines card and Food & Lifestyle suggestions grid visible */
+.col-8 > div:nth-child(2),
+.col-8 > div:nth-child(3) {
+    /* display: none !important; */
+}
+
+/* parameter card layout overrides */
+.parameter-status-row {
+    padding: 16px 20px !important;
+    border-radius: var(--radius-sm) !important;
+    background: var(--surface) !important;
+    border: 1px solid var(--border-glass) !important;
+    box-shadow: var(--shadow-sm) !important;
+    margin-bottom: 12px !important;
+    transform: none !important;
+    transition: none !important;
+}
+
+.parameter-status-row:hover {
+    border-color: rgba(255, 255, 255, 0.08) !important;
+    box-shadow: var(--shadow-md) !important;
+    transform: none !important;
+}
+
+.parameter-row-header .param-name {
+    font-size: 0.95rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.01em !important;
+}
+
+/* Enable and style progress bar wrappers */
+.param-bar-wrapper {
+    display: block !important;
+    margin: 14px 0 !important;
+    background: rgba(255, 255, 255, 0.02) !important;
+    border: 1px solid rgba(255, 255, 255, 0.06) !important;
+    border-radius: var(--radius-sm) !important;
+    padding: 12px 14px !important;
+}
+
+.param-bar-track {
+    height: 6px !important;
+    background: rgba(255, 255, 255, 0.06) !important;
+    border-radius: 4px !important;
+    position: relative !important;
+    margin-top: 8px !important;
+    overflow: visible !important;
+}
+
+.param-bar-indicator {
+    height: 100% !important;
+    border-radius: 4px !important;
+    box-shadow: 0 0 8px currentColor;
+    animation: springProgressBar 1.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes springProgressBar {
+    from { width: 0%; }
+}
+
+.param-bar-marker {
+    position: absolute !important;
+    height: 14px !important;
+    width: 2px !important;
+    background: rgba(255, 255, 255, 0.5) !important;
+    top: -4px !important;
+    border-radius: 1px !important;
+}
+
+.param-bar-range {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem !important;
+    color: var(--text-muted) !important;
+    margin-top: 8px !important;
+    font-weight: 500 !important;
+}
+
+/* Enable Explanation and Possible Causes text blocks */
+.parameter-status-row > .param-description:nth-of-type(1),
+.parameter-status-row > .param-description:nth-of-type(2) {
+    display: block !important;
+    font-size: 0.88rem !important;
+    color: var(--text-secondary) !important;
+    margin-top: 6px !important;
+    line-height: 1.5 !important;
+}
+
+/* Format Recommendation/Suggestion row */
+.parameter-status-row > .param-description:nth-of-type(3) {
+    display: block !important;
+    border-top: none !important;
+    padding-top: 0 !important;
+    margin-top: 10px !important;
+    color: var(--text-secondary) !important;
+    font-size: 0.88rem !important;
+}
+
+/* Spacing & Card Simplification */
+.analyzer-card {
+    padding: 32px !important;
+    border-radius: var(--radius-md) !important;
+    background: var(--surface) !important;
+    box-shadow: var(--shadow-sm) !important;
+}
+
+.step-tab {
+    font-family: inherit;
+    font-size: 0.9rem !important;
+}
+
+.step-tab.active {
+    color: var(--primary) !important;
+    border-bottom-color: var(--primary) !important;
+    text-shadow: none !important;
+}
+
+/* Stagger parameter card reveals on page reveal */
+.parameter-status-list > div:nth-child(1) { opacity: 0; transform: translateY(12px); animation: slideUpReveal 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.05s forwards; }
+.parameter-status-list > div:nth-child(2) { opacity: 0; transform: translateY(12px); animation: slideUpReveal 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.12s forwards; }
+.parameter-status-list > div:nth-child(3) { opacity: 0; transform: translateY(12px); animation: slideUpReveal 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.19s forwards; }
+.parameter-status-list > div:nth-child(4) { opacity: 0; transform: translateY(12px); animation: slideUpReveal 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.26s forwards; }
+.parameter-status-list > div:nth-child(5) { opacity: 0; transform: translateY(12px); animation: slideUpReveal 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.33s forwards; }
+
+@keyframes slideUpReveal {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Status badge pulse indicator dots */
+.badge {
+    position: relative !important;
+    padding-left: 20px !important;
+    display: inline-flex;
+    align-items: center;
+}
+
+.badge::before {
+    content: '';
+    position: absolute;
+    left: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+    animation: statusDotPulse 2s infinite ease-in-out;
+}
+
+@keyframes statusDotPulse {
+    0% { transform: translateY(-50%) scale(1); opacity: 1; }
+    50% { transform: translateY(-50%) scale(1.6); opacity: 0.3; }
+    100% { transform: translateY(-50%) scale(1); opacity: 1; }
+}
+
+.badge-high::before {
+    animation: statusDotPulse 1s infinite ease-in-out;
+    box-shadow: 0 0 8px #ff1744;
+}
+
+.badge-low::before {
+    animation: statusDotPulse 1.4s infinite ease-in-out;
+    box-shadow: 0 0 8px #f59e0b;
+}
+
+.badge-medium::before {
+    animation: statusDotPulse 1.4s infinite ease-in-out;
+    box-shadow: 0 0 8px #f59e0b;
+}
+
+.badge-normal::before {
+    animation: statusDotPulse 2.4s infinite ease-in-out;
+    box-shadow: 0 0 8px #10b981;
+}

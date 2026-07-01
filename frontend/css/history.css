@@ -1,0 +1,26 @@
+.modal-body-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.8fr;
+    gap: 32px;
+    margin-top: 20px;
+}
+@media (max-width: 768px) {
+    .modal-body-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+}
+.pagination-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 32px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-glass);
+}
+.pagination-btn {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border-radius: var(--radius-md) !important;
+}

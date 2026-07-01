@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Smart CBC SaaS</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <!-- ApexCharts CDN for advanced trend analytics -->
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+</head>
+<body class="dashboard-layout">
+    <div class="main-wrapper">
+        <div class="glow-spot glow-spot-1"></div>
+        <div class="glow-spot glow-spot-2"></div>
+
+        <!-- Navigation Bar -->
+        <nav class="navbar" id="navbar">
+            <div class="container nav-container">
+                <a href="index.html" class="navbar-brand">
+                    <span>🩸</span> SMART CBC
+                </a>
+                <ul class="nav-links" id="nav-links">
+                    <!-- Loaded dynamically in main.js -->
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Main Dashboard View -->
+        <main class="container" style="flex: 1; padding-top: 40px;">
+            <header style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 32px; flex-wrap:wrap; gap:16px;">
+                <div>
+                    <h1 style="font-size: 2.2rem; font-weight: 800; letter-spacing:-0.025em;">Patient Dashboard</h1>
+                    <p style="color: var(--text-secondary);">Overview of your blood health trends and report logs</p>
+                </div>
+                <div style="display:flex; gap:12px;">
+                    <button id="export-csv-btn" class="btn btn-secondary">📥 Export CSV</button>
+                    <a href="analyze.html" class="btn btn-primary">➕ New Analysis</a>
+                </div>
+            </header>
+
+            <!-- Dashboard Grid -->
+            <div class="dashboard-grid">
+                <!-- Metrics Summary Cards -->
+                <div class="col-4 glass-panel metric-card">
+                    <div>
+                        <div class="metric-header">
+                            <span>TOTAL ANALYSES</span>
+                            <span class="metric-icon">📂</span>
+                        </div>
+                        <div class="metric-value" id="total-reports">0</div>
+                    </div>
+                    <div class="metric-footer">Total CBC reports stored in database</div>
+                </div>
+
+                <div class="col-4 glass-panel metric-card">
+                    <div>
+                        <div class="metric-header">
+                            <span>RISK DISTRIBUTION</span>
+                            <span class="metric-icon">⚠️</span>
+                        </div>
+                        <div class="risk-indicators-list">
+                            <div class="risk-ind-item">
+                                <span><span class="risk-ind-dot" style="background:var(--success);"></span>Low Risk:</span>
+                                <span id="low-risk-count" style="font-weight:700;">0</span>
+                            </div>
+                            <div class="risk-ind-item">
+                                <span><span class="risk-ind-dot" style="background:var(--warning);"></span>Medium Risk:</span>
+                                <span id="medium-risk-count" style="font-weight:700;">0</span>
+                            </div>
+                            <div class="risk-ind-item">
+                                <span><span class="risk-ind-dot" style="background:var(--danger);"></span>High Risk:</span>
+                                <span id="high-risk-count" style="font-weight:700;">0</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="metric-footer">Risk categorization of your blood history</div>
+                </div>
+
+                <div class="col-4 glass-panel metric-card">
+                    <div>
+                        <div class="metric-header">
+                            <span>LATEST CLINICAL STATUS</span>
+                            <span class="metric-icon">📝</span>
+                        </div>
+                        <p id="health-summary-text" style="font-size:0.88rem; color:var(--text-secondary); margin-top:12px; line-height:1.6;">
+                            No data available yet. Please complete a blood test analysis.
+                        </p>
+                    </div>
+                    <div class="metric-footer">Automated local AI medical overview</div>
+                </div>
+
+                <!-- Latest Risk Gauge -->
+                <div class="col-4 glass-panel" style="padding: 24px; display:flex; flex-direction:column; justify-content:space-between;">
+                    <div>
+                        <h3 style="font-size:1.15rem; font-weight:800; margin-bottom:16px;">Latest Health Score</h3>
+                        <div class="risk-gauge-container">
+                            <div class="risk-gauge-circle" id="risk-gauge-circle">
+                                <div class="risk-gauge-inner">
+                                    <span class="risk-gauge-value" id="risk-gauge-value">N/A</span>
+                                    <span class="risk-gauge-label" id="risk-gauge-label">No Data</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p style="text-align:center; font-size:0.8rem; color:var(--text-muted); margin-top:8px;">
+                        Percentage represents structural blood parameter deviation severity.
+                    </p>
+                </div>
+
+                <!-- Advanced Parameter Chart -->
+                <div class="col-8 glass-panel" style="padding: 24px;">
+                    <div class="trends-header">
+                        <div>
+                            <h3 style="font-size:1.15rem; font-weight:800;">Analytical History Trends</h3>
+                            <p style="color:var(--text-secondary); font-size:0.8rem; margin-top:2px;">Track your blood parameters over time</p>
+                        </div>
+                        <div style="display:flex; gap:12px; align-items:center;">
+                            <select id="trend-parameter-select" class="history-filter-select" style="padding:8px 12px; font-size:0.85rem;">
+                                <option value="hemoglobin">Hemoglobin (Hb)</option>
+                                <option value="wbc">White Blood Cells (WBC)</option>
+                                <option value="platelets">Platelets (PLT)</option>
+                                <option value="rbc">Red Blood Cells (RBC)</option>
+                                <option value="mcv">MCV</option>
+                            </select>
+                            <div class="filter-btn-group" id="chart-timeframe-group">
+                                <button class="filter-btn active" data-timeframe="all">All Time</button>
+                                <button class="filter-btn" data-timeframe="monthly">Monthly</button>
+                                <button class="filter-btn" data-timeframe="weekly">Weekly</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chart-wrapper">
+                        <div id="trend-chart" style="width: 100%; min-height: 250px;"></div>
+                    </div>
+                </div>
+
+                <!-- Daily Recommendation & Notification Card -->
+                <div class="col-4 glass-panel daily-widget-card" style="padding: 24px;">
+                    <h3 style="font-size:1.15rem; font-weight:800; margin-bottom:16px;">Daily Health Advice</h3>
+                    <div class="daily-widget-content">
+                        <div class="daily-widget-icon">🥗</div>
+                        <div>
+                            <h4 style="font-weight:700; font-size:0.95rem; margin-bottom:4px;" id="widget-recommendation-title">Iron Absorption Tip</h4>
+                            <p style="font-size:0.85rem; color:var(--text-secondary); line-height:1.6;" id="widget-recommendation-text">
+                                Did you know that consuming vitamin C (e.g. citrus fruits) alongside iron-rich plant foods significantly boosts iron absorption? Avoid drinking tea/coffee with meals.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <h3 style="font-size:1.15rem; font-weight:800; margin-top:32px; margin-bottom:16px;">Dashboard Alerts</h3>
+                    <div class="activity-timeline" id="notifications-list" style="margin-top: 12px;">
+                        <!-- Populate dynamic items or placeholder -->
+                        <div class="timeline-item">
+                            <div class="timeline-icon-box">🔔</div>
+                            <div class="timeline-content">
+                                <div class="timeline-time">System</div>
+                                <div class="timeline-title">Welcome to Smart CBC V2!</div>
+                                <div class="timeline-desc">Your clinical records are synced securely using BCrypt password cryptography.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Analyses Table -->
+                <div class="col-8 glass-panel" style="padding: 24px; margin-bottom: 24px;">
+                    <h3 style="font-size:1.15rem; font-weight:800; margin-bottom:8px;">Recent Blood Reports</h3>
+                    <div class="table-responsive">
+                        <table class="custom-table">
+                            <thead>
+                                <tr>
+                                    <th>Fav</th>
+                                    <th>Date</th>
+                                    <th>Hb</th>
+                                    <th>WBC</th>
+                                    <th>Platelets</th>
+                                    <th>RBC</th>
+                                    <th>MCV</th>
+                                    <th>Risk Level</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="recent-reports-body">
+                                <tr>
+                                    <td colspan="9" style="text-align: center; color: var(--text-muted); padding: 32px 0;">
+                                        Loading reports...
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <p>&copy; 2026 Smart CBC Analysis System. For informational purposes only. Not a medical diagnostic substitute.</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Script loading -->
+    <script src="js/api.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>

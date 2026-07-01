@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Settings - Smart CBC Analysis</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/auth.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/profile.css">
+    <!-- ApexCharts CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+</head>
+<body class="dashboard-layout">
+    <div class="main-wrapper">
+        <div class="glow-spot glow-spot-1"></div>
+        <div class="glow-spot glow-spot-2"></div>
+
+        <!-- Navigation Bar -->
+        <nav class="navbar" id="navbar">
+            <div class="container nav-container">
+                <a href="index.html" class="navbar-brand">
+                    <span>🩸</span> SMART CBC
+                </a>
+                <ul class="nav-links" id="nav-links">
+                    <!-- Loaded dynamically in main.js -->
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Main Workspace -->
+        <main class="container" style="flex: 1; padding-top: 40px; margin-bottom: 40px;">
+            <header style="margin-bottom: 32px;">
+                <h1 style="font-size: 2.2rem; font-weight: 800; letter-spacing:-0.025em;">User Portal & Settings</h1>
+                <p style="color: var(--text-secondary);">Manage your medical profile settings, analyze historical health trends, and track achievements</p>
+            </header>
+
+            <!-- Statistical Counter Row -->
+            <div class="dashboard-grid" style="margin-top: 0; margin-bottom: 24px;">
+                <div class="col-3 glass-panel metric-card">
+                    <div class="metric-header">
+                        <span>Total Analyses</span>
+                        <div class="metric-icon">🩸</div>
+                    </div>
+                    <div class="metric-value" id="profile-reports-count">0</div>
+                    <div class="metric-footer">Total panels recorded</div>
+                </div>
+                <div class="col-3 glass-panel metric-card">
+                    <div class="metric-header">
+                        <span>Avg Health Score</span>
+                        <div class="metric-icon" style="background: rgba(34, 197, 94, 0.1); color: var(--success);">📈</div>
+                    </div>
+                    <div class="metric-value" id="profile-avg-score">0%</div>
+                    <div class="metric-footer">Average baseline metrics</div>
+                </div>
+                <div class="col-3 glass-panel metric-card">
+                    <div class="metric-header">
+                        <span>Peak Health Score</span>
+                        <div class="metric-icon" style="background: rgba(255, 107, 129, 0.1); color: var(--accent);">⚡</div>
+                    </div>
+                    <div class="metric-value" id="profile-peak-score">0%</div>
+                    <div class="metric-footer">Highest recorded health score</div>
+                </div>
+                <div class="col-3 glass-panel metric-card">
+                    <div class="metric-header">
+                        <span>Member Since</span>
+                        <div class="metric-icon" style="background: rgba(245, 158, 11, 0.1); color: var(--warning);">🗓️</div>
+                    </div>
+                    <div class="metric-value" id="profile-member-since" style="font-size: 1.25rem; margin-top: 20px; font-weight: 700;">-</div>
+                    <div class="metric-footer">Registration timestamp</div>
+                </div>
+            </div>
+
+            <div class="profile-dashboard-grid">
+                <!-- Left column: Profile overview & Achievements checklist -->
+                <div class="col-4" style="display: flex; flex-direction: column; gap: 24px; grid-column: span 4;">
+                    <!-- Avatar Monogram -->
+                    <div class="glass-panel" style="padding: 32px; text-align: center;">
+                        <div class="profile-avatar-circle" id="profile-avatar">U</div>
+                        <h2 id="profile-name-header" style="font-size: 1.4rem; font-weight: 800;">User Name</h2>
+                        <p id="profile-email-header" style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 4px;">user@example.com</p>
+                    </div>
+
+                    <!-- Achievements checklist -->
+                    <div class="glass-panel" style="padding: 24px;">
+                        <h3 style="font-size: 1.1rem; font-weight:800; margin-bottom: 16px;">System Achievements</h3>
+                        <div style="display:flex; flex-direction:column; gap:12px;">
+                            <div class="achievement-item" id="ach-guardian">
+                                <span class="achievement-icon">🛡️</span>
+                                <div class="achievement-details">
+                                    <h4>Data Guardian</h4>
+                                    <p>Account secured with custom credentials</p>
+                                </div>
+                            </div>
+                            <div class="achievement-item" id="ach-first">
+                                <span class="achievement-icon">🧪</span>
+                                <div class="achievement-details">
+                                    <h4>First Panel Analyzed</h4>
+                                    <p>Submitted and analyzed a CBC report</p>
+                                </div>
+                            </div>
+                            <div class="achievement-item" id="ach-healthy">
+                                <span class="achievement-icon">💚</span>
+                                <div class="achievement-details">
+                                    <h4>Healthy Baseline</h4>
+                                    <p>Achieved an Excellent health score (>=90%)</p>
+                                </div>
+                            </div>
+                            <div class="achievement-item" id="ach-master">
+                                <span class="achievement-icon">👑</span>
+                                <div class="achievement-details">
+                                    <h4>Health Master</h4>
+                                    <p>Analyzed 5 or more complete blood tests</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right column: Trends, Activity feed, and forms -->
+                <div class="col-8" style="display: flex; flex-direction: column; gap: 24px; grid-column: span 8;">
+                    <!-- Health Trends Chart -->
+                    <div class="glass-panel" style="padding: 24px;">
+                        <h3 style="font-size: 1.15rem; font-weight:800; margin-bottom: 16px;">Medical Health Trends</h3>
+                        <div class="chart-wrapper">
+                            <div id="profile-trends-chart"></div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Activity feed -->
+                    <div class="glass-panel" style="padding: 24px;">
+                        <h3 style="font-size: 1.15rem; font-weight:800; margin-bottom: 16px;">Recent Physiological Activity</h3>
+                        <div id="profile-activity-feed" class="activity-timeline">
+                            <!-- Injected dynamically in profile.js -->
+                        </div>
+                    </div>
+
+                    <!-- Profile Settings Forms -->
+                    <div class="glass-panel" style="padding: 32px;">
+                        <h3 style="font-size: 1.25rem; font-weight:800; margin-bottom: 24px; border-bottom: 1px solid var(--border-glass); padding-bottom: 12px;">Edit Profile Information</h3>
+                        
+                        <form id="profile-form">
+                            <div class="form-group">
+                                <label for="profile-name" class="form-label">Full Name</label>
+                                <input type="text" id="profile-name" class="form-input" required placeholder="Your full name">
+                                <div class="error-msg" id="profile-name-error"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="profile-email" class="form-label">Email Address</label>
+                                <input type="email" id="profile-email" class="form-input" required placeholder="your.name@example.com">
+                                <div class="error-msg" id="profile-email-error"></div>
+                            </div>
+
+                            <h3 style="font-size: 1.25rem; font-weight:800; margin-top: 40px; margin-bottom: 24px; border-bottom: 1px solid var(--border-glass); padding-bottom: 12px;">Change Password</h3>
+                            
+                            <div class="form-group">
+                                <label for="profile-password" class="form-label">New Password (Leave blank to keep current)</label>
+                                <div class="password-input-wrapper">
+                                    <input type="password" id="profile-password" class="form-input" placeholder="Min. 6 characters">
+                                    <button type="button" class="password-toggle-btn" id="password-toggle">👁️</button>
+                                </div>
+                                <div class="error-msg" id="profile-password-error"></div>
+                            </div>
+
+                            <div style="margin-top: 32px; text-align: right;">
+                                <button type="submit" class="btn btn-primary" id="profile-submit-btn" style="min-width: 160px;">Save Changes</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <p>&copy; 2026 Smart CBC Analysis System. For informational purposes only. Not a medical diagnostic substitute.</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Script loading -->
+    <script src="js/api.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/profile.js"></script>
+    <script>
+        // Password toggle visibility
+        const pw = document.getElementById('profile-password');
+        const toggle = document.getElementById('password-toggle');
+        if (pw && toggle) {
+            toggle.addEventListener('click', () => {
+                const isPw = pw.type === 'password';
+                pw.type = isPw ? 'text' : 'password';
+                toggle.textContent = isPw ? '🙈' : '👁️';
+            });
+        }
+    </script>
+</body>
+</html>

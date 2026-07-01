@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About CBC Parameters - Smart CBC Analysis</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/about.css">
+</head>
+<body>
+    <div class="main-wrapper">
+        <div class="glow-spot glow-spot-1"></div>
+        <div class="glow-spot glow-spot-2"></div>
+
+        <!-- Navigation Bar -->
+        <nav class="navbar" id="navbar">
+            <div class="container nav-container">
+                <a href="index.html" class="navbar-brand">
+                    <span>🩸</span> SMART CBC
+                </a>
+                <ul class="nav-links" id="nav-links">
+                    <!-- Loaded dynamically in main.js -->
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Main Info Space -->
+        <main class="container" style="flex:1; padding-top:40px; margin-bottom:40px;">
+            <header style="margin-bottom: 32px; text-align: center;">
+                <h1 style="font-size: 2.2rem; font-weight: 800;">Complete Blood Count (CBC) Parameters</h1>
+                <p style="color: var(--text-secondary); max-width:600px; margin: 8px auto 0 auto;">Understand the science, reference boundaries, and physiological significance of your blood values</p>
+            </header>
+
+            <!-- Grid details -->
+            <div class="dashboard-grid">
+                <div class="col-8 glass-panel about-card-section">
+                    <h2 style="font-size:1.4rem; margin-bottom:16px; border-bottom:1px solid var(--border-glass); padding-bottom:12px;">Reference Ranges Reference Guide</h2>
+                    <p style="font-size:0.95rem; color:var(--text-secondary); margin-bottom:16px;">
+                        The Complete Blood Count (CBC) is one of the most common blood tests. It measures the cells that circulate in your blood, providing general clues about your immune response, oxygen delivery, and coagulation profile.
+                    </p>
+                    
+                    <table class="reference-table">
+                        <thead>
+                            <tr>
+                                <th>Parameter</th>
+                                <th>Biological Role</th>
+                                <th>Standard Normal Range</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="font-weight:700;">Hemoglobin (Hb)</td>
+                                <td>Oxygen-carrying protein inside red blood cells.</td>
+                                <td><span class="badge badge-normal">12.0 - 16.0 g/dL</span></td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight:700;">White Blood Cells (WBC)</td>
+                                <td>Immune defense cells fighting infections and pathogens.</td>
+                                <td><span class="badge badge-normal">4000 - 11000 /µL</span></td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight:700;">Platelet Count (PLT)</td>
+                                <td>Cell fragments responsible for blood clotting and healing.</td>
+                                <td><span class="badge badge-normal">150000 - 450000 /µL</span></td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight:700;">Red Blood Cells (RBC)</td>
+                                <td>Transport cells carrying oxygen to tissues and organs.</td>
+                                <td><span class="badge badge-normal">4.5 - 5.9 M/µL</span></td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight:700;">Mean Corpuscular Volume (MCV)</td>
+                                <td>The average size of a single red blood cell.</td>
+                                <td><span class="badge badge-normal">80.0 - 100.0 fL</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Right sidebar: General guidelines -->
+                <div class="col-4 glass-panel about-card-section" style="display:flex; flex-direction:column; gap:20px;">
+                    <h3 style="font-size:1.15rem; border-bottom:1px solid var(--border-glass); padding-bottom:10px;">General Health Tips</h3>
+                    
+                    <div>
+                        <h4 style="font-size:0.95rem; color:var(--primary); margin-bottom:6px;">✦ Hydration</h4>
+                        <p style="font-size:0.85rem; color:var(--text-secondary); line-height:1.5;">
+                            Dehydration can cause artificial elevation of red blood cell counts and hemoglobin concentrations. Stay well-hydrated before testing.
+                        </p>
+                    </div>
+
+                    <div>
+                        <h4 style="font-size:0.95rem; color:var(--primary); margin-bottom:6px;">✦ Iron Absorption</h4>
+                        <p style="font-size:0.85rem; color:var(--text-secondary); line-height:1.5;">
+                            Boost iron absorption by pairing iron-rich foods (beans, meats, spinach) with Vitamin C (oranges, bell peppers). Avoid coffee or tea with meals.
+                        </p>
+                    </div>
+
+                    <div>
+                        <h4 style="font-size:0.95rem; color:var(--primary); margin-bottom:6px;">✦ Vitamin B12 & Folate</h4>
+                        <p style="font-size:0.85rem; color:var(--text-secondary); line-height:1.5;">
+                            Required for proper RBC synthesis and division. Folate is found in dark leafy greens, while B12 is found in animal proteins and fortified cereals.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <p>&copy; 2026 Smart CBC Analysis System. For informational purposes only. Not a medical diagnostic substitute.</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Script loading -->
+    <script src="js/api.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

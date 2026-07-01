@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Smart CBC Analysis</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/auth.css">
+</head>
+<body>
+    <div class="auth-wrapper">
+        <!-- Left Visual Side -->
+        <div class="auth-visual-side">
+            <div class="auth-logo">
+                <span>🩸</span> SMART CBC
+            </div>
+            
+            <div class="auth-visual-content">
+                <h1 class="auth-visual-title">Advanced Blood Diagnostics SaaS.</h1>
+                <p class="auth-visual-text">Access your blood panels history, review AI-backed health suggestions, and monitor metrics over time.</p>
+            </div>
+            
+            <!-- Animated Background Cells -->
+            <div class="auth-decoration-cells">
+                <div class="floating-cell floating-cell-1"></div>
+                <div class="floating-cell floating-cell-2"></div>
+                <div class="floating-cell floating-cell-3"></div>
+            </div>
+            
+            <!-- Particle Container -->
+            <div class="particle-container">
+                <div class="particle" style="left: 10%; width: 6px; height: 6px; animation-delay: 0s; animation-duration: 12s;"></div>
+                <div class="particle" style="left: 30%; width: 8px; height: 8px; animation-delay: 2s; animation-duration: 16s;"></div>
+                <div class="particle" style="left: 55%; width: 5px; height: 5px; animation-delay: 4s; animation-duration: 10s;"></div>
+                <div class="particle" style="left: 75%; width: 10px; height: 10px; animation-delay: 1s; animation-duration: 18s;"></div>
+                <div class="particle" style="left: 90%; width: 7px; height: 7px; animation-delay: 6s; animation-duration: 14s;"></div>
+            </div>
+
+            <div class="auth-visual-footer">
+                &copy; 2026 Smart CBC Analysis System. Designed for clinical overview.
+            </div>
+        </div>
+
+        <!-- Right Form Side -->
+        <div class="auth-form-side">
+            <div class="auth-form-container glass-panel">
+                <div class="auth-header">
+                    <h2 class="auth-title">Welcome Back</h2>
+                    <p class="auth-subtitle">New to the platform? <a href="register.html">Sign up now</a></p>
+                </div>
+                
+                <form id="login-form">
+                    <div class="form-group">
+                        <label for="email" class="form-label">Email Address</label>
+                        <input type="email" id="email" class="form-input" placeholder="name@example.com" required autocomplete="username">
+                        <span id="email-error" class="error-msg"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password" class="form-label">Password</label>
+                        <div class="password-input-wrapper">
+                            <input type="password" id="password" class="form-input" placeholder="••••••••" required autocomplete="current-password">
+                            <button type="button" class="password-toggle-btn" id="password-toggle">👁️</button>
+                        </div>
+                        <span id="password-error" class="error-msg"></span>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary auth-btn" style="width: 100%; margin-top: 8px;">Sign In</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script loading -->
+    <script src="js/api.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/auth.js"></script>
+    <script>
+        // Password visibility toggle
+        const pwInput = document.getElementById('password');
+        const pwToggle = document.getElementById('password-toggle');
+        if (pwInput && pwToggle) {
+            pwToggle.addEventListener('click', () => {
+                const isPw = pwInput.type === 'password';
+                pwInput.type = isPw ? 'text' : 'password';
+                pwToggle.textContent = isPw ? '🙈' : '👁️';
+            });
+        }
+    </script>
+</body>
+</html>
