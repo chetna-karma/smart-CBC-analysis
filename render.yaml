@@ -1,0 +1,30 @@
+services:
+  - type: web
+    name: smart-cbc-backend
+    env: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn --bind 0.0.0.0:$PORT --chdir backend app:app"
+    plan: free
+    envVars:
+      - key: FLASK_ENV
+        value: production
+      - key: FLASK_DEBUG
+        value: "0"
+      - key: SECRET_KEY
+        generateValue: true
+      - key: FRONTEND_URL
+        sync: false # Set this to your Netlify site URL (e.g., https://your-site.netlify.app)
+      
+      # Database Configuration for MySQL Cloud
+      - key: DB_TYPE
+        value: mysql
+      - key: DB_HOST
+        sync: false # Enter your MySQL Cloud Host URL
+      - key: DB_PORT
+        value: "3306"
+      - key: DB_USER
+        sync: false # Enter your MySQL Cloud Username
+      - key: DB_PASSWORD
+        sync: false # Enter your MySQL Cloud Password
+      - key: DB_NAME
+        value: CBD # Set database name
