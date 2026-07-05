@@ -19,6 +19,8 @@ Before starting, ensure you have the following installed on your machine:
 ### 1. Install Backend Dependencies
 Open your command prompt or terminal in the project directory (`CBC`) and install the required Python packages:
 
+link to visit the website : https://6a44afa8906e9c67c66fdad2--smart-cbc-analysis.netlify.app
+
 ```bash
 pip install -r requirements.txt
 ```
